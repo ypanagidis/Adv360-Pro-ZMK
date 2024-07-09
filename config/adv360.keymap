@@ -29,6 +29,19 @@
             flavor = "tap-preferred";
             bindings = <&kp>, <&kp>;
         };
+
+        hmr_test_left: hmr_test_left {
+            compatible = "zmk,behavior-hold-tap";
+            label = "HMR_TEST_LEFT";
+            bindings = <&kp>, <&kp>;
+
+            #binding-cells = <2>;
+            tapping-term-ms = <200>;
+            quick-tap-ms = <175>;
+            hold-trigger-on-release;
+            flavor = "balanced";
+            hold-trigger-key-positions = <7 8 9 10 11 12 13 21 22 23 24 25 26 27 38 39 40 41 42 43 44 45 54 55 56 57 58 59 68 69 70 71 72 73 74 75 37 53 35 36 52 65 66 67>;
+        };
     };
 
     keymap {
@@ -38,9 +51,9 @@
             bindings = <
 &kp ESCAPE  &kp N1     &kp N2   &kp N3    &kp N4     &kp N5  &kp GRAVE                                                                             &kp BACKSLASH  &kp N6  &kp N7    &kp N8        &kp N9                &kp N0                 &kp MINUS
 &kp TAB     &kp Q      &kp W    &kp E     &kp R      &kp T   &kp MINUS                                                                             &kp EQUAL      &kp Y   &kp U     &kp I         &kp O                 &kp P                  &kp BSLH
-&kp TAB     &kp A      &kp S    &kp D     &kp F      &kp G   &kp LBKT   &kp LCTRL       &tog 1                &mo 1              &kp LEFT_CONTROL  &kp RBKT       &kp H   &kp J     &kp K         &kp L                 &kp SEMI               &kp ENTER
+&kp TAB     &kp A      &kp S    &kp D     &kp F      &kp G   &kp LBKT   &kp LCTRL       &tog 2                &mo 2              &kp LEFT_CONTROL  &kp RBKT       &kp H   &kp J     &kp K         &kp L                 &kp SEMI               &kp SINGLE_QUOTE
 &kp LSHFT   &kp Z      &kp X    &kp C     &kp V      &kp B                              &kp LEFT_ALT          &kp RIGHT_COMMAND                                   &kp N   &kp M     &kp COMMA     &kp DOT               &kp FSLH               &kp RSHFT
-&mo 2       &kp GRAVE  &kp TAB  &kp LEFT  &kp RIGHT          &kp SPACE  &kp LEFT_SHIFT  &kp LEFT_COMMAND      &kp ENTER          &kp LEFT_CONTROL  &kp BACKSPACE          &kp DOWN  &kp UP_ARROW  &kp NON_US_BACKSLASH  &kp RIGHT_PARENTHESIS  &mo 2
+&tog 4      &kp GRAVE  &kp TAB  &kp LEFT  &kp RIGHT          &kp SPACE  &kp LEFT_SHIFT  &kp LEFT_COMMAND      &kp ENTER          &kp LEFT_CONTROL  &kp BACKSPACE          &kp DOWN  &kp UP_ARROW  &kp NON_US_BACKSLASH  &kp RIGHT_PARENTHESIS  &mo 2
             >;
         };
 
@@ -50,17 +63,17 @@
 &kp TAB    &kp Q   &kp W   &kp E     &kp R      &kp T   &bootloader                                                 &bootloader  &kp Y           &kp KP_N7   &kp KP_N8     &kp KP_N9      &kp KP_MINUS     &kp BSLH
 &kp ESC    &kp A   &kp A   &kp A     &kp A      &kp A   &bl BL_OFF   &kp LCTRL  &kp LALT      &kp LGUI   &kp RCTRL  &none        &kp LEFT_ARROW  &kp DOWN    &kp UP_ARROW  &kp RIGHT      &kp KP_PLUS      &kp SQT
 &kp LSHFT  &kp Z   &kp X   &kp C     &kp V      &kp B                           &kp HOME      &kp PG_UP                          &kp N           &kp KP_N1   &kp KP_N2     &kp KP_N3      &kp KP_ENTER     &kp RSHFT
-&mo 2      &tog 3  &tog 2  &kp LEFT  &kp RIGHT          &kp BSPC     &kp DEL    &to 0         &to 0      &kp ENTER  &kp KP_N0                    &kp UP      &kp DOWN      &kp KP_DOT     &tog 1           &mo 2
+&mo 2      &tog 3  &tog 2  &kp LEFT  &kp RIGHT          &kp BSPC     &kp DEL    &to 1         &to 1      &kp ENTER  &kp KP_N0                    &kp UP      &kp DOWN      &kp KP_DOT     &tog 2           &mo 2
             >;
         };
 
         layer_fn {
             bindings = <
-&kp F1  &kp F2  &kp F3  &kp F4  &kp F5  &kp F6  &tog 1                                      &mo 3   &kp F7  &kp F8  &kp F9  &kp F10  &kp F11  &kp F12
+&kp F1  &kp F2  &kp F3  &kp F4  &kp F5  &kp F6  &tog 2                                      &mo 3   &kp F7  &kp F8  &kp F9  &kp F10  &kp F11  &kp F12
 &trans  &trans  &trans  &trans  &trans  &trans  &none                                       &none   &trans  &trans  &trans  &trans   &trans   &trans
 &trans  &trans  &trans  &trans  &trans  &trans  &none   &trans  &trans      &trans  &trans  &none   &trans  &trans  &trans  &trans   &trans   &trans
 &trans  &trans  &trans  &trans  &trans  &trans                  &trans      &trans                  &trans  &trans  &trans  &trans   &trans   &trans
-&trans  &to 0   &tog 2  &tog 3  &trans          &trans  &trans  &trans      &trans  &trans  &trans          &trans  &trans  &trans   &trans   &trans
+&trans  &to 1   &tog 2  &tog 3  &trans          &trans  &trans  &trans      &trans  &trans  &trans          &trans  &trans  &trans   &trans   &trans
             >;
         };
 
@@ -70,7 +83,17 @@
 &none  &none         &none         &none         &none         &none         &bootloader                                            &bootloader             &none  &none       &none       &none  &none  &none
 &none  &none         &none         &none         &none         &none         &none        &none  &none      &bt BT_CLR  &none       &rgb_ug RGB_MEFS_CMD 5  &none  &none       &none       &none  &none  &none
 &none  &none         &none         &none         &macro_ver    &none                             &none      &none                                           &none  &none       &none       &none  &none  &none
-&none  &to 0         &tog 1        &tog 2        &none                       &none        &none  &none      &none       &bl BL_TOG  &rgb_ug RGB_TOG                &bl BL_INC  &bl BL_DEC  &none  &none  &none
+&none  &to 1         &tog 2        &tog 2        &none                       &none        &none  &none      &none       &bl BL_TOG  &rgb_ug RGB_TOG                &bl BL_INC  &bl BL_DEC  &none  &none  &none
+            >;
+        };
+
+        layer_4 {
+            bindings = <
+&kp ESCAPE  &kp N1     &kp N2   &kp N3                       &kp N4                         &kp N5  &kp GRAVE                                                                             &kp BACKSLASH  &kp N6  &kp N7    &kp N8        &kp N9                &kp N0                 &kp MINUS
+&kp TAB     &kp Q      &kp W    &kp E                        &kp R                          &kp T   &kp MINUS                                                                             &kp EQUAL      &kp Y   &kp U     &kp I         &kp O                 &kp P                  &kp BSLH
+&kp TAB     &kp A      &kp S    &hmr_test_left D LEFT_SHIFT  &hmr_test_left F LEFT_CONTROL  &kp G   &kp LBKT   &kp LCTRL       &to 0                 &mo 2              &kp LEFT_CONTROL  &kp RBKT       &kp H   &kp J     &kp K         &kp L                 &kp SEMI               &kp SINGLE_QUOTE
+&kp LSHFT   &kp Z      &kp X    &kp C                        &kp V                          &kp B                              &kp LEFT_ALT          &kp RIGHT_COMMAND                                   &kp N   &kp M     &kp COMMA     &kp DOT               &kp FSLH               &kp RSHFT
+&mo 2       &kp GRAVE  &kp TAB  &kp LEFT                     &kp RIGHT                              &kp SPACE  &kp LEFT_SHIFT  &kp LEFT_COMMAND      &kp ENTER          &kp LEFT_CONTROL  &kp BACKSPACE          &kp DOWN  &kp UP_ARROW  &kp NON_US_BACKSLASH  &kp RIGHT_PARENTHESIS  &mo 2
             >;
         };
     };
